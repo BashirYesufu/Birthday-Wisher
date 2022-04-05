@@ -1,16 +1,14 @@
-# This is a sample Python script.
+import smtplib
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+my_email = "your email"
+password = "your password"
 
+with smtplib.SMTP('smtp.gmail.com') as connection:
+    connection.starttls()
+    connection.login(user=my_email, password=password,)
+    connection.sendmail(
+        from_addr=my_email,
+        to_addrs='receiver email',
+        msg='Subject:Hello\n\nThis is the body of my mail. New email'
+    )
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
