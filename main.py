@@ -1,23 +1,22 @@
-# import smtplib
-#
-# my_email = "your email"
-# password = "your password"
-#
-# with smtplib.SMTP('smtp.gmail.com') as connection:
-#     connection.starttls()
-#     connection.login(user=my_email, password=password,)
-#     connection.sendmail(
-#         from_addr=my_email,
-#         to_addrs='receiver email',
-#         msg='Subject:Hello\n\nThis is the body of my mail. New email'
-#     )
+import smtplib
+import  datetime as dt
+import random
 
-import datetime as dt
+MY_EMAIL = 'YOUR EMAIL'
+MY_PASSWORD = 'YOUR PASSWORD'
 
 now = dt.datetime.now()
-year = now.year
-month = now.month
-day_of_week = now.weekday()
-print(day_of_week)
+weekday = now.weekday()
+if weekday == 1:
+    with open('quotes.txt') as quote_file:
+        all_quote = quote_file.readlines()
+        quote = random.choice(all_quote)
 
-date_of_birth = dt.datetime(year=1995, month=12, day=15)
+    with smtplib.SMTP('smtp.gmail.com') as connection:
+        connection.starttls()
+        connection.login(MY_EMAIL, MY_PASSWORD)
+        connection.sendmail(
+            from_addr=MY_EMAIL,
+            to_addrs=MY_EMAIL,
+            msg=f"Subject:Monday Motivation\n\n{quote}"
+        )
